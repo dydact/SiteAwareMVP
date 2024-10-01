@@ -1,4 +1,5 @@
 export interface Client {
+  id: string;
   name: string;
   treatmentStartDate: string;
   progressTimeline: ProgressItem[];
@@ -7,6 +8,13 @@ export interface Client {
 export interface ProgressItem {
   status: 'completed' | 'in_progress' | 'pending';
   description: string;
+}
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  // Add any other properties that your User type should have
 }
 
 export interface TreatmentPlan {

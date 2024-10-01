@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-ts';
+import react from '@vitejs/plugin-react';  // Change this line
 import path from 'path';
 
 export default defineConfig({
@@ -8,5 +8,6 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
 });

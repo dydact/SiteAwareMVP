@@ -1,18 +1,33 @@
 import React, { useState, Suspense } from 'react';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { BarChart, Video, FileText, Users, Clock, Settings, MessageSquare, Brain, TrendingUp } from 'lucide-react';
-import { ClientProgressTimeline } from '@/components/ClientProgressTimeline';
-import { MedicaidBilling } from '@/components/MedicaidBilling';
-import { Payroll } from '@/components/Payroll';
-import { AITreatmentPlan } from '@/components/AITreatmentPlan';
-import { PredictiveAnalytics } from '@/components/PredictiveAnalytics';
-import { Chat } from '@/components/Chat';
-import { UserMenu } from '@/components/UserMenu';
-import { CompanyMenu } from '@/components/CompanyMenu';
-import { Auth } from '@/components/Auth';
-import { useAuth } from '@/hooks/useAuth';
+import { ClientProgressTimeline } from '../components/ClientProgressTimeline';
+import { MedicaidBilling } from '../components/MedicaidBilling';
+import { Payroll } from '../components/Payroll';
+import { AITreatmentPlan } from '../components/AITreatmentPlan';
+import { PredictiveAnalytics } from '../components/PredictiveAnalytics';
+import { Chat } from '../components/Chat';
+import { UserMenu } from '../components/UserMenu';
+import { CompanyMenu } from '../components/CompanyMenu';
+import { Auth } from '../components/Auth';
+import { useAuth } from '../hooks/useAuth';
 import { motion, AnimatePresence } from 'framer-motion';
+
+// Import other components
+import Analytics from '../components/Analytics';
+import Billing from '../components/Billing';
+import ClientManagement from '../components/ClientManagement';
+import Clients from '../components/Clients';
+import JobManagement from '../components/JobManagement';
+import Payroll from '../components/Payroll';
+import PricingManagement from '../components/PricingManagement';
+import Profile from '../components/Profile';
+import Register from '../components/Register';
+import Scheduling from '../components/Scheduling';
+import TimeTracking from '../components/TimeTracking';
+import UserManagement from '../components/UserManagement';
+import VideoAnalysis from '../components/VideoAnalysis';
 
 // Define the possible tab values
 type TabType = 'overview' | 'clients' | 'billing' | 'payroll' | 'ai-treatment' | 'predictive-analytics' | 'chat';
@@ -54,7 +69,7 @@ const Dashboard: React.FC = () => {
 
       {/* Main Content */}
       <div className="flex-1 overflow-auto">
-        <Header user={user} />
+        <Header user={user} activeTab={activeTab} isAuthenticated={isAuthenticated} />
 
         <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           <AnimatePresence mode="wait">
@@ -87,11 +102,20 @@ const Sidebar: React.FC<{ setActiveTab: (tab: TabType) => void }> = ({ setActive
 };
 
 // Header component
-const Header: React.FC<{ user: any }> = ({ user }) => {
-  // Implement header content here
+const Header: React.FC<{ user: any, activeTab: TabType, isAuthenticated: boolean }> = ({ user, activeTab, isAuthenticated }) => {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-10">
-      {/* Add header content */}
+      <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+        <h2 className="text-2xl font-semibold text-gray-800">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1).replace('-', ' ')}</h2>
+        <div className="flex items-center space-x-4">
+          <CompanyMenu />
+          {isAuthenticated ? (
+            <UserMenu user={user} />
+          ) : (
+            <Auth />
+          )}
+        </div>
+      </div>
     </header>
   );
 };
