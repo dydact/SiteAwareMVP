@@ -1,30 +1,31 @@
 import React from 'react';
-import { Card as RadixCard } from '@radix-ui/themes';
 
-// Custom Card component
-export const Card = ({ children, ...props }) => (
-  <RadixCard {...props}>
-    {children}
-  </RadixCard>
-);
+export const Card = ({ title, children }) => {
+  return (
+    <div className="bg-white shadow-md rounded-lg p-6 m-4">
+      <h2 className="text-xl font-bold mb-4">{title}</h2>
+      {children}
+    </div>
+  );
+};
 
-// Custom CardContent component
-export const CardContent = ({ children, ...props }) => (
-  <div className="card-content" {...props}>
-    {children}
-  </div>
-);
+export const EmployeeCard = ({ employee }) => {
+  return (
+    <Card title={employee.name}>
+      <p>Email: {employee.email}</p>
+      <p>Clients: {employee.clients.items.length}</p>
+    </Card>
+  );
+};
 
-// Custom CardHeader component
-export const CardHeader = ({ children, ...props }) => (
-  <div className="card-header" {...props}>
-    {children}
-  </div>
-);
+export const ClientCard = ({ client }) => {
+  return (
+    <Card title={client.name}>
+      <p>Email: {client.email}</p>
+      <p>Employee: {client.employee.name}</p>
+      <p>Treatment Plans: {client.treatmentPlans.items.length}</p>
+    </Card>
+  );
+};
 
-// Custom CardTitle component
-export const CardTitle = ({ children, ...props }) => (
-  <h2 className="card-title" {...props}>
-    {children}
-  </h2>
-);
+// Add more specific card components for other models as needed

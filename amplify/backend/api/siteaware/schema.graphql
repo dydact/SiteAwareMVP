@@ -6,25 +6,25 @@ type Employee @model {
   id: ID!
   name: String!
   email: String!
-  clients: [Client] @hasMany(indexName: "byEmployee", fields: ["id"])
+  clients: [Client] @hasMany(indexName: "byEmployeeID", fields: ["id"])
 }
 
 type Client @model {
   id: ID!
   name: String!
   email: String!
-  employee: Employee @belongsTo(fields: ["employeeId"])
-  employeeId: ID!
-  treatmentPlans: [TreatmentPlan] @hasMany(indexName: "byClient", fields: ["id"])
+  employee: Employee @belongsTo(fields: ["employeeID"])
+  employeeID: ID! @index(name: "byEmployeeID")
+  treatmentPlans: [TreatmentPlan] @hasMany(indexName: "byClientID", fields: ["id"])
 }
 
 type TreatmentPlan @model {
   id: ID!
   title: String!
   description: String
-  client: Client @belongsTo(fields: ["clientId"])
-  clientId: ID!
-  tasks: [Task] @hasMany(indexName: "byTreatmentPlan", fields: ["id"])
+  client: Client @belongsTo(fields: ["clientID"])
+  clientID: ID! @index(name: "byClientID")
+  tasks: [Task] @hasMany(indexName: "byTreatmentPlanID", fields: ["id"])
 }
 
 type Task @model {
@@ -32,51 +32,50 @@ type Task @model {
   title: String!
   description: String
   supervised: Boolean!
-  treatmentPlan: TreatmentPlan @belongsTo(fields: ["treatmentPlanId"])
-  treatmentPlanId: ID!
-  device: Device @belongsTo(fields: ["deviceId"])
-  deviceId: ID
+  treatmentPlan: TreatmentPlan @belongsTo(fields: ["treatmentPlanID"])
+  treatmentPlanID: ID! @index(name: "byTreatmentPlanID")
+  device: Device @belongsTo(fields: ["deviceID"])
+  deviceID: ID @index(name: "byDeviceID")
 }
 
 type Device @model {
   id: ID!
   name: String!
   type: String!
-  tasks: [Task] @hasMany(indexName: "byDevice", fields: ["id"])
+  tasks: [Task] @hasMany(indexName: "byDeviceID", fields: ["id"])
 }
 
 type Site @model {
   id: ID!
   name: String!
   location: String
-  reports: [Report] @hasMany(indexName: "bySite", fields: ["id"])
+  reports: [Report] @hasMany(indexName: "bySiteID", fields: ["id"])
 }
 
 type Report @model {
   id: ID!
   title: String!
   date: AWSDateTime!
-  site: Site @belongsTo(fields: ["siteId"])
-  siteId: ID!
-  observations: [Observation] @hasMany(indexName: "byReport", fields: ["id"])
+  site: Site @belongsTo(fields: ["siteID"])
+  siteID: ID! @index(name: "bySiteID")
+  observations: [Observation] @hasMany(indexName: "byReportID", fields: ["id"])
 }
 
 type Observation @model {
   id: ID!
-  report: Report @belongsTo(fields: ["reportId"])
-  reportId: ID!
+  report: Report @belongsTo(fields: ["reportID"])
+  reportID: ID! @index(name: "byReportID")
   content: String!
   category: String
   severity: Int
-  context: Context @hasOne(fields: ["contextId"])
-  contextId: ID
+  context: Context @hasOne
 }
 
 type Context @model {
   id: ID!
   description: String!
   timestamp: AWSDateTime!
-  observations: [Observation] @hasMany(indexName: "byContext", fields: ["id"])
+  observation: Observation @belongsTo
 }
 
 # Developer Note: This schema represents a site awareness system.
