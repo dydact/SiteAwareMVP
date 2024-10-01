@@ -1,0 +1,30 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
+type Site @model {
+  id: ID!
+  name: String!
+  location: String
+  reports: [Report] @hasMany
+}
+
+type Report @model {
+  id: ID!
+  title: String!
+  date: AWSDateTime!
+  site: Site @belongsTo
+  observations: [Observation] @hasMany
+}
+
+type Observation @model {
+  id: ID!
+  report: Report @belongsTo
+  content: String!
+  category: String
+  severity: Int
+}
+
+# Developer Note: This schema represents a site awareness system.
+# Sites can have multiple reports, and each report can have multiple observations.
+# Consider adding user authentication and authorization in the future.
