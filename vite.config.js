@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';  // Change this line
+import react from '@vitejs/plugin-react';
 import path from 'path';
 
 export default defineConfig({
@@ -12,7 +12,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: ['axios'],
+      external: ['axios', 'react-router-dom'],
     },
   },
 });
