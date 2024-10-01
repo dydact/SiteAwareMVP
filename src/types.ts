@@ -1,17 +1,12 @@
 export interface Client {
-  id: string;
   name: string;
   treatmentStartDate: string;
   progressTimeline: ProgressItem[];
-  faceId: string; // For facial recognition
-  treatmentPlan: TreatmentPlan;
-  schedules: Schedule[];
 }
 
 export interface ProgressItem {
   status: 'completed' | 'in_progress' | 'pending';
   description: string;
-  date: string;
 }
 
 export interface TreatmentPlan {

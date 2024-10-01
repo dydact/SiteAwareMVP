@@ -49,11 +49,11 @@ export default function Dashboard() {
                   </>
                 )}
                 {activeTab === "clients" && <ClientProgressTimeline />}
-                {activeTab === "billing" && <MedicaidBilling />}
-                {activeTab === "payroll" && <Payroll />}
-                {activeTab === "ai-treatment" && <AITreatmentPlan />}
-                {activeTab === "predictive-analytics" && <PredictiveAnalytics />}
-                {activeTab === "chat" && <Chat />}
+                {activeTab === "billing" && <div>Medicaid Billing Placeholder</div>}
+                {activeTab === "payroll" && <div>Payroll Placeholder</div>}
+                {activeTab === "ai-treatment" && <div>AI Treatment Plan Placeholder</div>}
+                {activeTab === "predictive-analytics" && <div>Predictive Analytics Placeholder</div>}
+                {activeTab === "chat" && <div>Chat Placeholder</div>}
               </Suspense>
             </motion.div>
           </AnimatePresence>
