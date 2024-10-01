@@ -1,4 +1,20 @@
 {
     "Version": 5,
-    "ElasticsearchWarning": true
+    "ElasticsearchWarning": true,
+    "ResolverConfig": {
+        "project": {
+            "ConflictHandler": "AUTOMERGE",
+            "ConflictDetection": "VERSION"
+        }
+    },
+    "TableNameOverrides": [
+        {
+            "ModelName": "Employee",
+            "TableName": "Employee-${env}"
+        },
+        {
+            "ModelName": "Client",
+            "TableName": "Client-${env}"
+        }
+    ]
 }

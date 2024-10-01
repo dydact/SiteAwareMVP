@@ -4,18 +4,16 @@ input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONL
 
 type Employee @model {
   id: ID!
-  name: String!
-  email: String!
-  clients: [Client] @hasMany(indexName: "byEmployeeID", fields: ["id"])
+  # ... other fields ...
 }
 
 type Client @model {
   id: ID!
   name: String!
-  email: String!
-  employee: Employee @belongsTo(fields: ["employeeID"])
-  employeeID: ID! @index(name: "byEmployeeID")
+  classification: String
+  contactEmail: String
   treatmentPlans: [TreatmentPlan] @hasMany(indexName: "byClientID", fields: ["id"])
+  # ... other fields ...
 }
 
 type TreatmentPlan @model {
@@ -80,4 +78,5 @@ type Context @model {
 
 # Developer Note: This schema represents a site awareness system.
 # Sites can have multiple reports, and each report can have multiple observations.
+# Clients can have multiple treatment plans, and each treatment plan can have multiple tasks.
 # Consider adding user authentication and authorization in the future.

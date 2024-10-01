@@ -2,20 +2,19 @@ const AWS = require('aws-sdk');
 
 // Configure AWS SDK
 AWS.config.update({
-  region: process.env.AWS_REGION,
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+  region: process.env.AWS_REGION
 });
 
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
+const env = process.env.ENVIRONMENT || 'dev';
 
 const Tables = {
-  Client: 'SiteAwareMVP-Clients',
-  Employee: 'SiteAwareMVP-Employees',
-  Activity: 'SiteAwareMVP-Activities',
-  Assignment: 'SiteAwareMVP-Assignments',
-  TreatmentPlan: 'SiteAwareMVP-TreatmentPlans',
-  Worker: 'SiteAwareMVP-Workers'
+  Client: `SiteAwareMVP-Clients-${env}`,
+  Employee: `SiteAwareMVP-Employees-${env}`,
+  Activity: `SiteAwareMVP-Activities-${env}`,
+  Assignment: `SiteAwareMVP-Assignments-${env}`,
+  TreatmentPlan: `SiteAwareMVP-TreatmentPlans-${env}`,
+  Worker: `SiteAwareMVP-Workers-${env}`
 };
 
 module.exports = {

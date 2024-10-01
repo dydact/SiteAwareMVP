@@ -30,6 +30,15 @@
     "EmptyResource": {
       "Type": "Custom::EmptyResource",
       "Condition": "AlwaysFalse"
+    },
+    "CustomLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Sub": "/aws/lambda/siteaware-${env}-log-group"
+        },
+        "RetentionInDays": 14
+      }
     }
   },
   "Conditions": {

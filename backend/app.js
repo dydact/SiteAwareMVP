@@ -5,6 +5,7 @@ const privilegesRoutes = require('./routes/privileges');
 // Import other route files
 
 const app = express();
+const env = process.env.REACT_APP_ENV || 'dev'; // Add this line
 
 app.use(cors());
 app.use(express.json());
@@ -31,5 +32,5 @@ app.use('/api/privileges', privilegesRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on port ${port} in ${env} environment`);
 });
