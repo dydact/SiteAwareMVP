@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';  // Change this import
+import Link from '@/compatibility/next/link.js';  // Update this line
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { MessageSquare, Settings } from 'lucide-react';
@@ -19,7 +19,7 @@ export default function TopBanner() {
             <ul className="flex space-x-4">
               {navItems.map((item) => (
                 <li key={item}>
-                  <Link to={`/${item.toLowerCase().replace(' ', '-')}`} className="hover:text-purple-200">
+                  <Link href={`/${item.toLowerCase().replace(' ', '-')}`} className="hover:text-purple-200">
                     {item}
                   </Link>
                 </li>

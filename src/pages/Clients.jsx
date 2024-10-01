@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import TopBanner from '@/components/TopBanner';
-import ClientList from '@/components/ClientList';
-import ClientDetails from '@/components/ClientDetails';
-import { clientApi } from '@/services/api';
+import Layout from '../components/Layout';
+import ClientList from '../components/ClientList';
+import ClientDetails from '../components/ClientDetails';
+import { clientApi } from '../services/api';
 
 function Clients() {
   const [clients, setClients] = useState([]);
@@ -27,21 +27,18 @@ function Clients() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <TopBanner />
-      <main className="max-w-7xl mx-auto p-6">
-        <h1 className="text-3xl font-bold mb-6">Clients</h1>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
-        <div className="flex space-x-6">
-          <ClientList 
-            clients={clients} 
-            onSelectClient={setSelectedClient} 
-            loading={loading}
-          />
-          {selectedClient && <ClientDetails client={selectedClient} />}
-        </div>
-      </main>
-    </div>
+    <Layout>
+      <h1 className="text-3xl font-bold mb-6">Clients</h1>
+      {error && <p className="text-red-500 mb-4">{error}</p>}
+      <div className="flex space-x-6">
+        <ClientList 
+          clients={clients} 
+          onSelectClient={setSelectedClient} 
+          loading={loading}
+        />
+        {selectedClient && <ClientDetails client={selectedClient} />}
+      </div>
+    </Layout>
   );
 }
 

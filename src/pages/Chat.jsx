@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import TopBanner from '@/components/TopBanner';
-import ChatUserList from '@/components/ChatUserList';
-import ChatWindow from '@/components/ChatWindow';
-import { chatApi } from '@/services/api';
+import Layout from '../components/Layout';
+import ChatUserList from '../components/ChatUserList';
+import ChatWindow from '../components/ChatWindow';
+import { chatApi } from '../services/api';
 
-function Chat() {
+const Chat = () => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -55,27 +55,28 @@ function Chat() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <TopBanner />
-      <main className="max-w-7xl mx-auto p-6">
-        <h1 className="text-3xl font-bold mb-6">Chat</h1>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
-        <div className="flex space-x-6">
-          <ChatUserList 
-            users={users} 
-            onSelectUser={setSelectedUser} 
-            loading={loading}
-          />
-          {selectedUser && (
-            <ChatWindow 
-              user={selectedUser} 
-              messages={messages} 
-              onSendMessage={sendMessage}
+    <Layout>
+      <div className="min-h-screen bg-gray-100">
+        <main className="max-w-7xl mx-auto p-6">
+          <h1 className="text-3xl font-bold mb-6">Chat</h1>
+          {error && <p className="text-red-500 mb-4">{error}</p>}
+          <div className="flex space-x-6">
+            <ChatUserList 
+              users={users} 
+              onSelectUser={setSelectedUser} 
+              loading={loading}
             />
-          )}
-        </div>
-      </main>
-    </div>
+            {selectedUser && (
+              <ChatWindow 
+                user={selectedUser} 
+                messages={messages} 
+                onSendMessage={sendMessage}
+              />
+            )}
+          </div>
+        </main>
+      </div>
+    </Layout>
   );
 }
 

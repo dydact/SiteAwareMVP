@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../components/Header'
 import { getUsers, createUser } from '../services/api'
+import Layout from '@/components/Layout';
 
 function UserManagement() {
   const [users, setUsers] = useState([])

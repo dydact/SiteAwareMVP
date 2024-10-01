@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../components/Header'
 import { getClients, createClient } from '../services/api'
+import Layout from '@/components/Layout';
 
 function ClientManagement() {
   const [clients, setClients] = useState([])

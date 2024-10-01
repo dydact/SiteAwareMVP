@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../components/Header'
 import { getVideoStreams, analyzeVideo } from '../services/api'
+import Layout from '@/components/Layout';
 
 function VideoAnalysis() {
   const [videoStreams, setVideoStreams] = useState([])

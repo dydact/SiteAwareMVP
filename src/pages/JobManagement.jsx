@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../components/Header'
 import { getJobs, createJob } from '../services/api'
+import Layout from '@/components/Layout';
 
 function JobManagement() {
   const [jobs, setJobs] = useState([])
