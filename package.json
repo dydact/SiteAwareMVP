@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm install @aws-amplify/cli && vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "start": "vite preview"
@@ -20,6 +20,7 @@
     "framer-motion": "^10.12.16",
     "lucide-react": "^0.244.0",
     "md5": "^2.3.0",
+    "npx": "^10.2.2",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-datepicker": "^7.4.0",
@@ -36,6 +37,7 @@
     "eslint-plugin-react-refresh": "^0.4.1",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.3.2",
-    "vite": "^4.3.9"
+    "vite": "^4.3.9",
+    "@aws-amplify/cli": "^11.1.1"
   }
 }
