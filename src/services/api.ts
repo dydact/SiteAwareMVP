@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import { User } from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -129,5 +130,5 @@ export const invoiceApi = {
 
 export const authApi = {
   login: (credentials: { email: string; password: string }) => api.post('/auth/login', credentials),
-  getCurrentUser: () => api.get<User>('/auth/me'),
+  getCurrentUser: (): Promise<AxiosResponse<User>> => axios.get('/api/current-user'),
 };

@@ -102,6 +102,6 @@ export {
 };
 
 export const authApi = {
-  // ... existing methods ...
-  getCurrentUser: () => axios.get('/api/user/current'),
+  getCurrentUser: () => axios.get('/api/current-user'),
+  // Other API methods...
 }
