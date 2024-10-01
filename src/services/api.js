@@ -166,22 +166,6 @@ export const schedulingApi = {
     Promise.resolve(generateDummySchedulingData(new Date(startDate), new Date(endDate))),
 };
 
-// Export all APIs
-export {
-  analyticsApi,
-  authApi,
-  billingApi,
-  chatApi,
-  clientApi,
-  invoiceApi,
-  organizationApi,
-  payrollApi,
-  privilegeApi,
-  projectApi,
-  roleApi,
-  timeEntryApi,
-  userApi,
-};
 
 // Export individual functions
 export const getClients = clientApi.getClients;
@@ -195,44 +179,3 @@ export const getUsers = userApi.getUsers;
 export const createUser = userApi.createUser;
 export const getVideoStreams = () => api.get('/video-streams');
 export const analyzeVideo = (data) => api.post('/analyze-video', data);
-
-// Add these to your existing api.js file
-
-export const medicaidApi = {
-  getBillingData: () => Promise.resolve(generateDummyBillingData(new Date(), new Date(new Date().setDate(new Date().getDate() + 30)))),
-  submitBilling: (data) => Promise.resolve({ success: true, message: 'Billing submitted successfully' }),
-};
-
-export const clientApi = {
-  getClients: () => Promise.resolve(Array(5).fill().map((_, i) => ({ id: i + 1, name: `Client ${i + 1}` }))),
-};
-
-export const serviceApi = {
-  getServices: () => Promise.resolve(Array(3).fill().map((_, i) => ({ id: i + 1, name: `Service ${i + 1}` }))),
-};
-
-export const documentationApi = {
-  getDocumentation: (clientId, serviceId, date) => 
-    Promise.resolve({ isComplete: Math.random() > 0.3 }),
-};
-
-// Add these to your existing api.js file
-
-export const revenueApi = {
-  getRevenueData: (startDate, endDate, filter) => 
-    Promise.resolve(generateDummyRevenueData(startDate, endDate)),
-  parseRemittanceFile: (file) => 
-    Promise.resolve(generateDummyRevenueData(new Date(), new Date(new Date().setDate(new Date().getDate() + 30)))),
-};
-
-export const schedulingApi = {
-  getSchedulingData: (startDate, endDate) => 
-    Promise.resolve(generateDummySchedulingData(new Date(startDate), new Date(endDate))),
-};
-
-// Update the existing billingApi
-export const billingApi = {
-  ...billingApi,
-  getBillingData: (startDate, endDate) => 
-    Promise.resolve(generateDummyBillingData(new Date(startDate), new Date(endDate))),
-};
