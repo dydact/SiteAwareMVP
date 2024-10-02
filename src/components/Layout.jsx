@@ -3,7 +3,8 @@ import Link from '../compatibility/next/link';
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 import { Button } from "../components/ui/button";
 import { MessageSquare, Settings, ArrowLeft, X } from 'lucide-react';
-import { Card, CardContent } from "../components/ui/card";
+import Card from "../components/ui/card";
+import CardContent from "../components/ui/card-content"; // Updated import
 
 const navItems = ['Dashboard', 'Clients', 'Billing', 'Time Tracking', 'Payroll', 'Analytics', 'Chat', 'Scheduling'];
 

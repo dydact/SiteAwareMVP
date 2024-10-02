@@ -1,76 +1,71 @@
 import React, { useState } from 'react';
-import Layout from '../components/Layout';
-import { useNavigate } from 'react-router-dom';
 import { authApi } from '../services/api';
 import { Button } from "../components/ui/button";
-import { Card, CardContent } from "../components/ui/card";
+import Card from "../components/ui/card";
+import CardContent from "../components/ui/card-content";
 
+/**
+ * Login component handles user authentication.
+ * It provides a form for users to enter their credentials and submit for login.
+ *
+ * @returns {JSX.Element} The rendered Login component
+ */
 function Login() {
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
-
+  /**
+   * Handles the login form submission.
+   * @param {React.FormEvent<HTMLFormElement>} e - The form submission event
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-
-    if (!credentials.email || !credentials.password) {
-      setError('Please enter both email and password');
-      return;
-    }
-
     try {
-      const response = await authApi.login(credentials);
-      localStorage.setItem('token', response.data.token);
-      const userResponse = await authApi.getCurrentUser();
-      navigate('/dashboard', { state: { user: userResponse.data } });
+      await authApi.login({ email, password });
+      // Redirect or update state on successful login
     } catch (err) {
-      setError(err.response?.data?.message || 'An error occurred during login');
+      setError('Invalid email or password');
     }
   };
 
   return (
-    <Layout>
-      <Card className="max-w-md mx-auto mt-20">
-        <CardContent className="p-6">
-          <h1 className="text-2xl font-bold mb-6">Login</h1>
-          {error && <p className="text-red-500 mb-4">{error}</p>}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <Card className="w-full max-w-md">
+        <CardContent>
+          <h2 className="text-2xl font-bold mb-4">Login</h2>
+          <form onSubmit={handleSubmit}>
+            {/* Email input */}
+            <div className="mb-4">
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
               <input
                 type="email"
                 id="email"
-                name="email"
-                value={credentials.email}
-                onChange={handleChange}
-                placeholder="Email"
-                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                required
               />
             </div>
-            <div>
+            {/* Password input */}
+            <div className="mb-4">
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
               <input
                 type="password"
                 id="password"
-                name="password"
-                value={credentials.password}
-                onChange={handleChange}
-                placeholder="Password"
-                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                required
               />
             </div>
+            {error && <p className="text-red-500 mb-4">{error}</p>}
             <Button type="submit" className="w-full">Login</Button>
           </form>
         </CardContent>
       </Card>
-    </Layout>
+    </div>
   );
 }
 

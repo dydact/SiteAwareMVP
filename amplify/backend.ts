@@ -1,4 +1,3 @@
-import { AmplifyBackend, AmplifyBackendProps } from '@aws-amplify/backend';
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { auth } from './auth/resource';
@@ -7,9 +6,9 @@ import { data } from './data/resource';
 /**
  * @see https://docs.amplify.aws/react/build-a-backend/ to add storage, functions, and more
  */
-export class Backend extends AmplifyBackend {
-  constructor(scope: Construct, props?: Partial<AmplifyBackendProps>) {
-    super(scope, props);
+export class Backend extends cdk.Stack {
+  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
 
     // Retrieve the environment from context or default to 'dev'
     const app = this.node.root as cdk.App;
@@ -44,12 +43,12 @@ export class SiteAwareStack extends cdk.Stack {
   }
 }
 
-const backend = defineBackend({
+const backend = {
   auth,
   data,
-});
+};
 
-const app = backend.createStack(cdk.App);
+const app = new cdk.App();
 const env = app.node.tryGetContext('env') || 'dev';
 
 new SiteAwareStack(app, `SiteAwareStack-${env}`, {

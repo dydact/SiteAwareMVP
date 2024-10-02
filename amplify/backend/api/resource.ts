@@ -1,3 +1,3 @@
-import * as api from './siteaware/cfg'; // Assuming 'siteaware' is your API name
+import * as api from './siteaware/config'; // Correct the path if necessary
 
 export { api };

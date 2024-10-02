@@ -1,31 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export const Card = ({ title, children }) => {
+/**
+ * Card component serves as a container with consistent styling.
+ *
+ * @param {object} props - Component props
+ * @param {React.ReactNode} props.children - Elements to be rendered inside the card
+ * @param {string} [props.className] - Additional CSS classes
+ */
+const Card = ({ children, className = '', ...props }) => {
   return (
-    <div className="bg-white shadow-md rounded-lg p-6 m-4">
-      <h2 className="text-xl font-bold mb-4">{title}</h2>
+    <div className={`card ${className}`} {...props}>
       {children}
     </div>
   );
 };
 
-export const EmployeeCard = ({ employee }) => {
-  return (
-    <Card title={employee.name}>
-      <p>Email: {employee.email}</p>
-      <p>Clients: {employee.clients.items.length}</p>
-    </Card>
-  );
+Card.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };
 
-export const ClientCard = ({ client }) => {
-  return (
-    <Card title={client.name}>
-      <p>Email: {client.email}</p>
-      <p>Employee: {client.employee.name}</p>
-      <p>Treatment Plans: {client.treatmentPlans.items.length}</p>
-    </Card>
-  );
-};
-
-// Add more specific card components for other models as needed
+export default Card;
