@@ -41,7 +41,9 @@
     "typescript": "^5.0.2",
     "vite": "^4.3.9",
     "rimraf": "^5.0.0",
-    "glob": "^10.0.0"
+    "glob": "^10.0.0",
+    "@aws-amplify/cli": "latest",
+    "@aws-amplify/backend-cli": "latest"
   },
   "config": {
     "cache": "/Volumes/dydact/npm-cache",
