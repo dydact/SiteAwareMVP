@@ -23,17 +23,30 @@
     "react-chartjs-2": "^5.2.0",
     "react-datepicker": "^7.4.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.x.x"
+    "react-router-dom": "^6.x.x",
+    "lru-cache": "^10.0.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
+    "@babel/plugin-transform-class-properties": "^7.22.5",
+    "@babel/plugin-transform-optional-chaining": "^7.22.5",
+    "@babel/plugin-transform-nullish-coalescing-operator": "^7.22.5",
+    "@eslint/config-array": "^2.0.0",
+    "@eslint/object-schema": "^1.0.0",
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "typescript": "^5.0.2",
-    "vite": "^4.3.9"
+    "vite": "^4.3.9",
+    "rimraf": "^5.0.0",
+    "glob": "^10.0.0"
+  },
+  "config": {
+    "cache": "/Volumes/dydact/npm-cache",
+    "prefix": "/Volumes/dydact/npm-global"
   }
 }
