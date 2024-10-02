@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Link from '../compatibility/next/link';
+import { Link } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
 import { Button } from "../components/ui/button";
-import { MessageSquare, Settings, ArrowLeft, X } from 'lucide-react';
+import { Home, Users, Briefcase, Users as Clients, DollarSign, Video, BarChart2, CreditCard } from 'lucide-react';
 import Card from "../components/ui/card";
 import CardContent from "../components/ui/card-content"; // Updated import
 

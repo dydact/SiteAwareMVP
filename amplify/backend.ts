@@ -2,7 +2,10 @@ import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { auth } from './auth/resource';
 import { data } from './data/resource';
-
+import { storage } from './storage/resource';
+import { api } from './api/resource';
+import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as iam from 'aws-cdk-lib/aws-iam';
 /**
  * @see https://docs.amplify.aws/react/build-a-backend/ to add storage, functions, and more
  */
@@ -24,6 +27,26 @@ export class Backend extends cdk.Stack {
     });
 
     // ... existing code ...
+
+    const s3Bucket = new s3.Bucket(this, 'SiteAwareBucket', {
+      bucketName: 'siteaware-dydact-io',
+      versioned: true,
+      encryption: s3.BucketEncryption.S3_MANAGED,
+    });
+
+    const s3AccessPoint = new s3.CfnAccessPoint(this, 'SiteAwareAccessPoint', {
+      bucket: s3Bucket.bucketName,
+      name: 'siteawarepushpull',
+      policy: new iam.PolicyDocument({
+        statements: [
+          new iam.PolicyStatement({
+            actions: ['s3:GetObject', 's3:PutObject'],
+            resources: [`arn:aws:s3:${this.region}:${this.account}:accesspoint/siteawarepushpull/*`],
+            principals: [new iam.AnyPrincipal()],
+          }),
+        ],
+      }).toJSON(),
+    });
   }
 }
 

@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { User } from '../types';
 
 
+// Accessing Vite's environment variables. Make sure to define VITE_API_BASE_URL in your .env file
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 
@@ -15,7 +16,8 @@ const api = axios.create({
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
-  if (token && config.headers) {
+  if (token) {
+    config.headers = config.headers || {};
     config.headers['Authorization'] = `Bearer ${token}`;
   }
   return config;

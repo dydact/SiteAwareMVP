@@ -21,4 +21,16 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    rollupOptions: {
+      external: [
+        // Make sure 'prop-types' is not listed here
+      ]
+    }
+  },
+  css: {
+    preprocessorOptions: {
+      // Add any CSS preprocessor options if needed
+    },
+  },
 });
