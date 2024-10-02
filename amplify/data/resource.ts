@@ -22,7 +22,7 @@ const schema = {
 export type SchemaType = typeof schema;
 
 export const data = defineData({
-  schema: schema,
+  schema: schema as DataSchemaInput,
   authorizationModes: {
     defaultAuthorizationMode: 'apiKey',
   },
