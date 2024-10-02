@@ -50,3 +50,7 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+
+# Add these lines to your .gitignore
+.env
+*.csv.bak
