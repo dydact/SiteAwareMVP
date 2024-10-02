@@ -21,7 +21,7 @@ const schema = {
 
 export type SchemaType = typeof schema;
 
-export const data = defineData({
+export const data = defineData<{ schema: SchemaType }>({
   schema: schema,
   authorizationModes: {
     defaultAuthorizationMode: 'apiKey',
