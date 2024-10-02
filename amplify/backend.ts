@@ -1,82 +1,14 @@
-import * as cdk from 'aws-cdk-lib';
-import { Construct } from 'constructs';
+import { defineBackend } from '@aws-amplify/backend';
 import { auth } from './auth/resource';
-import { data } from './data/resource';
 import { storage } from './storage/resource';
 import { api } from './api/resource';
-import * as s3 from 'aws-cdk-lib/aws-s3';
-import * as iam from 'aws-cdk-lib/aws-iam';
-/**
- * @see https://docs.amplify.aws/react/build-a-backend/ to add storage, functions, and more
- */
-export class Backend extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
+import { data } from './data/resource';
 
-    // Retrieve the environment from context or default to 'dev'
-    const app = this.node.root as cdk.App;
-    const env = app.node.tryGetContext('env') || 'dev';
-
-    // Create your custom stack
-    new SiteAwareStack(this, `SiteAwareStack-${env}`, {
-      env: { 
-        account: process.env.CDK_DEFAULT_ACCOUNT, 
-        region: process.env.CDK_DEFAULT_REGION 
-      },
-      // Add any other props needed for your SiteAwareStack
-    });
-
-    // ... existing code ...
-
-    const s3Bucket = new s3.Bucket(this, 'SiteAwareBucket', {
-      bucketName: 'siteaware-dydact-io',
-      versioned: true,
-      encryption: s3.BucketEncryption.S3_MANAGED,
-    });
-
-    const s3AccessPoint = new s3.CfnAccessPoint(this, 'SiteAwareAccessPoint', {
-      bucket: s3Bucket.bucketName,
-      name: 'siteawarepushpull',
-      policy: new iam.PolicyDocument({
-        statements: [
-          new iam.PolicyStatement({
-            actions: ['s3:GetObject', 's3:PutObject'],
-            resources: [`arn:aws:s3:${this.region}:${this.account}:accesspoint/siteawarepushpull/*`],
-            principals: [new iam.AnyPrincipal()],
-          }),
-        ],
-      }).toJSON(),
-    });
-  }
-}
-
-// Define your SiteAwareStack if it's not already defined
-export class SiteAwareStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
-
-    const env = this.node.tryGetContext('env') || 'dev';
-
-    new cdk.aws_logs.LogGroup(this, 'SiteAwareLogGroup', {
-      logGroupName: `/aws/lambda/siteaware-${env}-log-group`,
-      retention: cdk.aws_logs.RetentionDays.TWO_WEEKS
-    });
-
-    // Add any other resources specific to your SiteAware stack here
-  }
-}
-
-const backend = {
+const backend = defineBackend({
   auth,
+  storage,
+  api,
   data,
-};
-
-const app = new cdk.App();
-const env = app.node.tryGetContext('env') || 'dev';
-
-new SiteAwareStack(app, `SiteAwareStack-${env}`, {
-  env: { 
-    account: process.env.CDK_DEFAULT_ACCOUNT, 
-    region: process.env.CDK_DEFAULT_REGION 
-  },
 });
+
+export default backend;
