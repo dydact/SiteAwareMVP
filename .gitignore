@@ -29,6 +29,11 @@ amplify_outputs*
 amplifyconfiguration*
 .aider*
 
+
+# Add these lines to your .gitignore
+.env
+*.csv.bak
+
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
 amplify/.config/local-*
@@ -50,7 +55,3 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
-
-# Add these lines to your .gitignore
-.env
-*.csv.bak

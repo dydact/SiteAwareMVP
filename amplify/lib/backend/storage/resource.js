@@ -1,6 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.storage = void 0;
-// Placeholder for storage resource
-exports.storage = {};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVzb3VyY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9iYWNrZW5kL3N0b3JhZ2UvcmVzb3VyY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUEsbUNBQW1DO0FBQ3RCLFFBQUEsT0FBTyxHQUFHLEVBQUUsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8vIFBsYWNlaG9sZGVyIGZvciBzdG9yYWdlIHJlc291cmNlXG5leHBvcnQgY29uc3Qgc3RvcmFnZSA9IHt9O1xuIl19

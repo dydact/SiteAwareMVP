@@ -1,47 +1,38 @@
-name: Custom Pipeline
+name: Custom Amplify Pipeline
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - SiteAwareMVP
+
+env:
+  AMPLIFY_APP_ID: d8rgmm5whj4ck
+  AWS_REGION: us-east-1  # Make sure this is the correct region for your app
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Use Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14.x'
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install Dependencies
+        run: npm ci
 
-    - name: Run tests
-      run: npm test
+      - name: Deploy Backend
+        run: |
+          export CI=1
+          npx ampx pipeline-deploy --branch SiteAwareMVP --app-id $AMPLIFY_APP_ID
 
-    - name: Build project
-      run: npm run build
-
-    - name: Setup Amplify CLI
-      run: |
-        npm install -g @aws-amplify/cli
-        amplify --version
-
-    - name: Configure Amplify
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: 'us-east-1'  # Replace with your AWS region
-      run: |
-        amplify configure --non-interactive --region $AWS_REGION
-
-    - name: Amplify Push
-      run: |
-        amplify push --yes
-
-    # Add more steps as needed for your specific project requirements
+      # Add frontend build step if needed

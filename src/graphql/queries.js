@@ -8,18 +8,12 @@ export const getSite = /* GraphQL */ `
       name
       location
       reports {
-        items {
-          id
-          title
-          date
-          createdAt
-          updatedAt
-          siteReportsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -34,13 +28,12 @@ export const listSites = /* GraphQL */ `
         id
         name
         location
-        reports {
-          nextToken
-        }
         createdAt
         updatedAt
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
@@ -54,27 +47,18 @@ export const getReport = /* GraphQL */ `
         id
         name
         location
-        reports {
-          nextToken
-        }
         createdAt
         updatedAt
+        __typename
       }
       observations {
-        items {
-          id
-          content
-          category
-          severity
-          createdAt
-          updatedAt
-          reportObservationsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
       siteReportsId
+      __typename
     }
   }
 `;
@@ -89,21 +73,13 @@ export const listReports = /* GraphQL */ `
         id
         title
         date
-        site {
-          id
-          name
-          location
-          createdAt
-          updatedAt
-        }
-        observations {
-          nextToken
-        }
         createdAt
         updatedAt
         siteReportsId
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;
@@ -115,19 +91,10 @@ export const getObservation = /* GraphQL */ `
         id
         title
         date
-        site {
-          id
-          name
-          location
-          createdAt
-          updatedAt
-        }
-        observations {
-          nextToken
-        }
         createdAt
         updatedAt
         siteReportsId
+        __typename
       }
       content
       category
@@ -135,6 +102,7 @@ export const getObservation = /* GraphQL */ `
       createdAt
       updatedAt
       reportObservationsId
+      __typename
     }
   }
 `;
@@ -147,22 +115,16 @@ export const listObservations = /* GraphQL */ `
     listObservations(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        report {
-          id
-          title
-          date
-          createdAt
-          updatedAt
-          siteReportsId
-        }
         content
         category
         severity
         createdAt
         updatedAt
         reportObservationsId
+        __typename
       }
       nextToken
+      __typename
     }
   }
 `;

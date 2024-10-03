@@ -8,18 +8,12 @@ export const onCreateSite = /* GraphQL */ `
       name
       location
       reports {
-        items {
-          id
-          title
-          date
-          createdAt
-          updatedAt
-          siteReportsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -30,18 +24,12 @@ export const onUpdateSite = /* GraphQL */ `
       name
       location
       reports {
-        items {
-          id
-          title
-          date
-          createdAt
-          updatedAt
-          siteReportsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -52,18 +40,12 @@ export const onDeleteSite = /* GraphQL */ `
       name
       location
       reports {
-        items {
-          id
-          title
-          date
-          createdAt
-          updatedAt
-          siteReportsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
+      __typename
     }
   }
 `;
@@ -77,27 +59,18 @@ export const onCreateReport = /* GraphQL */ `
         id
         name
         location
-        reports {
-          nextToken
-        }
         createdAt
         updatedAt
+        __typename
       }
       observations {
-        items {
-          id
-          content
-          category
-          severity
-          createdAt
-          updatedAt
-          reportObservationsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
       siteReportsId
+      __typename
     }
   }
 `;
@@ -111,27 +84,18 @@ export const onUpdateReport = /* GraphQL */ `
         id
         name
         location
-        reports {
-          nextToken
-        }
         createdAt
         updatedAt
+        __typename
       }
       observations {
-        items {
-          id
-          content
-          category
-          severity
-          createdAt
-          updatedAt
-          reportObservationsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
       siteReportsId
+      __typename
     }
   }
 `;
@@ -145,27 +109,18 @@ export const onDeleteReport = /* GraphQL */ `
         id
         name
         location
-        reports {
-          nextToken
-        }
         createdAt
         updatedAt
+        __typename
       }
       observations {
-        items {
-          id
-          content
-          category
-          severity
-          createdAt
-          updatedAt
-          reportObservationsId
-        }
         nextToken
+        __typename
       }
       createdAt
       updatedAt
       siteReportsId
+      __typename
     }
   }
 `;
@@ -179,19 +134,10 @@ export const onCreateObservation = /* GraphQL */ `
         id
         title
         date
-        site {
-          id
-          name
-          location
-          createdAt
-          updatedAt
-        }
-        observations {
-          nextToken
-        }
         createdAt
         updatedAt
         siteReportsId
+        __typename
       }
       content
       category
@@ -199,6 +145,7 @@ export const onCreateObservation = /* GraphQL */ `
       createdAt
       updatedAt
       reportObservationsId
+      __typename
     }
   }
 `;
@@ -212,19 +159,10 @@ export const onUpdateObservation = /* GraphQL */ `
         id
         title
         date
-        site {
-          id
-          name
-          location
-          createdAt
-          updatedAt
-        }
-        observations {
-          nextToken
-        }
         createdAt
         updatedAt
         siteReportsId
+        __typename
       }
       content
       category
@@ -232,6 +170,7 @@ export const onUpdateObservation = /* GraphQL */ `
       createdAt
       updatedAt
       reportObservationsId
+      __typename
     }
   }
 `;
@@ -245,19 +184,10 @@ export const onDeleteObservation = /* GraphQL */ `
         id
         title
         date
-        site {
-          id
-          name
-          location
-          createdAt
-          updatedAt
-        }
-        observations {
-          nextToken
-        }
         createdAt
         updatedAt
         siteReportsId
+        __typename
       }
       content
       category
@@ -265,6 +195,7 @@ export const onDeleteObservation = /* GraphQL */ `
       createdAt
       updatedAt
       reportObservationsId
+      __typename
     }
   }
 `;

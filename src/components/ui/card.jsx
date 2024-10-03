@@ -1,5 +1,6 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
+import cn from 'classnames';
 
 /**
  * Card component serves as a container with consistent styling.
@@ -20,5 +21,14 @@ Card.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
 };
+
+export const CardContent = React.forwardRef(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("p-6 pt-0", className)}
+    {...props}
+  />
+))
+CardContent.displayName = "CardContent"
 
 export default Card;

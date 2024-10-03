@@ -1,0 +1,21 @@
+version: 1
+backend:
+  phases:
+    build:
+      commands:
+        - npm ci
+        - npx ampx generate outputs --branch $AWS_BRANCH --app-id $AWS_APP_ID
+        # The pipeline-deploy command is now in the GitHub Actions workflow
+frontend:
+  phases:
+    build:
+      commands:
+        - npm ci
+        - npm run build
+  artifacts:
+    baseDirectory: build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
