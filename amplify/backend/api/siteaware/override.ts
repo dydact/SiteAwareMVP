@@ -1,14 +1,16 @@
-import { AmplifyApiGraphqlResourceStackTemplate } from '@aws-amplify/cli-extensibility-helper';
-import { App, Stack } from 'aws-cdk-lib';
-import { aws_logs as logs } from 'aws-cdk-lib';
+import { AmplifyApiGraphQlResourceStackTemplate } from '@aws-amplify/cli-extensibility-helper';
+import * as cdk from 'aws-cdk-lib';
 
-export function override(resources: AmplifyApiGraphqlResourceStackTemplate) {
-  const env = resources.props.env || 'dev';
+export function override(
+  resources: AmplifyApiGraphQlResourceStackTemplate
+) {
+  const stack = resources as unknown as cdk.Stack;
+  const env = stack.node.tryGetContext('env') || 'dev';
 
   // Create a new Log Group with the environment name included
-  new logs.LogGroup(resources.stack, 'SiteAwareLogGroup', {
+  new cdk.aws_logs.LogGroup(stack, 'SiteAwareLogGroup', {
     logGroupName: `/aws/lambda/siteaware-${env}-log-group`,
-    retention: logs.RetentionDays.TWO_WEEKS,
+    retention: cdk.aws_logs.RetentionDays.TWO_WEEKS,
   });
 
   // Developer note:

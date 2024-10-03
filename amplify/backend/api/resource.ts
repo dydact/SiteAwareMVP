@@ -1,3 +1,4 @@
-import * as api from './siteaware/config'; // Correct the path if necessary
+import * as cdk from 'aws-cdk-lib';
+import { Construct } from 'constructs';
 
-export { api };
+export const api = {};
